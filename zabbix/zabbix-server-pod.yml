@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: zabbix
+  name: zabbix-server
+spec:
+  containers:
+  - name: zabbix-server
+    envFrom:
+    - configMapRef:
+        name: zabbix-server-cm
+        optional: false
+    - secretRef:
+        name: zabbix-secrets
+        optional: false
+    image: docker.io/zabbix/zabbix-server-pgsql:7.0.2-alpine
+    ports:
+    - containerPort: 10051
+      hostPort: 10051
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities: {}
+      privileged: false
+      readOnlyRootFilesystem: false
+    volumeMounts:
+    - mountPath: /var/lib/zabbix/:Z
+      name: zb-server-vol
+    workingDir: /var/lib/zabbix/
+  volumes:
+  - hostPath:
+      path: /opt/zb-server-vol
+      type: Directory
+    name: zb-server-vol
+status: {}

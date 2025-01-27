@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: zabbix
+  name: zabbix-web-nginx-pgsql
+spec:
+  containers:
+  - name: zabbix-web-nginx-pgsql
+    envFrom:
+    - configMapRef:
+        name: zabbix-web-cm
+        optional: false
+    - secretRef:
+        name: zabbix-secrets
+        optional: false
+    image: docker.io/zabbix/zabbix-web-nginx-pgsql:7.0.2-alpine
+    ports:
+    - containerPort: 8080
+      hostPort: 8080
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities: {}
+      privileged: false
+      readOnlyRootFilesystem: false
+    volumeMounts:
+    - mountPath: /etc/ssl/nginx:Z
+      name: zb-web-nginx-vol
+    - mountPath: /etc/zabbix/web/certs:Z
+      name: zb-web-certs-vol
+  volumes:
+  - hostPath:
+      path: /opt/zb-web-nginx-vol
+      type: Directory
+    name: zb-web-nginx-vol
+  - hostPath:
+      path: /opt/zb-web-certs-vol
+      type: Directory
+    name: zb-web-certs-vol
+status: {}

@@ -1,0 +1,8 @@
+apiVersion: v1
+# This configmap is used to define the env variables that the pod uses
+kind: ConfigMap
+metadata:
+  name: pgsql-cm
+data:
+  POSTGRES_USER: zabbix
+  POSTGRES_DB: zabbix

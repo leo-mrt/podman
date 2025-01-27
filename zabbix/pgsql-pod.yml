@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: pgsql
+  name: pgsql
+spec:
+  containers:
+  - name: pgsql
+    envFrom:
+    - configMapRef:
+        name: pgsql-cm
+        optional: false
+    - secretRef:
+        name: zabbix-secrets
+        optional: false
+    image: docker.io/library/postgres:16.6
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities: {}
+      privileged: false
+      readOnlyRootFilesystem: false
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data:Z
+      name: pgsql-db-vol
+    ports:
+    - containerPort: 5432
+      hostPort: 5432
+      protocol: TCP
+  volumes:
+  - hostPath:
+      path: /opt/pgsql-db-vol
+      type: Directory
+    name: pgsql-db-vol
+status: {}

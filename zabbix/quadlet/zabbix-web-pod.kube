@@ -1,0 +1,9 @@
+[Install]
+WantedBy=default.target
+
+[Unit]
+
+[Kube]
+Yaml=/etc/containers/systemd/zabbix-web-pod.yml
+ConfigMap=/etc/containers/systemd/zabbix-web-cm.yml
+PublishPort=80:80
