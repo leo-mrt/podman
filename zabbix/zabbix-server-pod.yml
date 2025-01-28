@@ -13,7 +13,7 @@ spec:
         optional: false
     - secretRef:
         name: zabbix-secrets
-        optional: false
+        optional: true
     image: docker.io/zabbix/zabbix-server-pgsql:7.0.2-alpine
     ports:
     - containerPort: 10051
@@ -26,12 +26,72 @@ spec:
       privileged: false
       readOnlyRootFilesystem: false
     volumeMounts:
-    - mountPath: /var/lib/zabbix/:Z
-      name: zb-server-vol
-    workingDir: /var/lib/zabbix/
+    - mountPath: /usr/lib/zabbix/alertscripts:Z
+      name: zb-server-alertscripts-vol
+    - mountPath: /usr/lib/zabbix/externalscripts:Z
+      name: zb-server-externalscripts-vol
+    - mountPath: /var/lib/zabbix/modules:Z
+      name: zb-server-modules-vol
+    - mountPath: /var/lib/zabbix/enc:Z
+      name: zb-server-enc-vol
+    - mountPath: /var/lib/zabbix/ssh_keys:Z
+      name: zb-server-ssh_keys-vol
+    - mountPath: /var/lib/zabbix/ssl/certs:Z
+      name: zb-server-ssl_certs-vol
+    - mountPath: /var/lib/zabbix/ssl/keys:Z
+      name: zb-server-ssl_keys-vol
+    - mountPath: /var/lib/zabbix/ssl/ssl_ca:Z
+      name: zb-server-ssl_ca-vol
+    - mountPath: /var/lib/zabbix/snmptraps:Z
+      name: zb-server-snmptraps-vol
+    - mountPath: /var/lib/zabbix/mibs:Z
+      name: zb-server-mibs-vol
+    - mountPath: /var/lib/zabbix/export:Z
+      name: zb-server-export-vol
+
   volumes:
   - hostPath:
-      path: /opt/zb-server-vol
+      path: /opt/zb-server-alertscripts-vol
       type: Directory
-    name: zb-server-vol
+    name: zb-server-alertscripts-vol
+  - hostPath:
+      path: /opt/zb-server-externalscripts-vol
+      type: Directory
+    name: zb-server-externalscripts-vol
+  - hostPath:
+      path: /opt/zb-server-modules-vol
+      type: Directory
+    name: zb-server-modules-vol
+  - hostPath:
+      path: /opt/zb-server-enc-vol
+      type: Directory
+    name: zb-server-enc-vol
+  - hostPath:
+      path: /opt/zb-server-ssh_keys-vol
+      type: Directory
+    name: zb-server-ssh_keys-vol
+  - hostPath:
+      path: /opt/zb-server-ssl_certs-vol
+      type: Directory
+    name: zb-server-ssl_certs-vol
+  - hostPath:
+      path: /opt/zb-server-ssl_keys-vol
+      type: Directory
+    name: zb-server-ssl_keys-vol
+  - hostPath:
+      path: /opt/zb-server-ssl_ca-vol
+      type: Directory
+    name: zb-server-ssl_ca-vol
+  - hostPath:
+      path: /opt/zb-server-snmptraps-vol
+      type: Directory
+    name: zb-server-snmptraps-vol
+  - hostPath:
+      path: /opt/zb-server-mibs-vol
+      type: Directory
+    name: zb-server-mibs-vol
+  - hostPath:
+      path: /opt/zb-server-export-vol
+      type: Directory
+    name: zb-server-export-vol
 status: {}

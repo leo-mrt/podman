@@ -13,7 +13,7 @@ spec:
         optional: false
     - secretRef:
         name: zabbix-secrets
-        optional: false
+        optional: true
     image: docker.io/zabbix/zabbix-web-nginx-pgsql:7.0.2-alpine
     ports:
     - containerPort: 8080

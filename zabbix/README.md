@@ -7,7 +7,7 @@ This deployment uses docker hub published offical containers for Zabbix.
 
 Edit `zabbix-server-cm.yml` and `zabbix-server-pod.yml` to your liking (changing things like passwords, usernames, pod names accordingly) and then either run directly with
 
-`podman kube play zabbix-secrets.yml`
+`podman kube play zabbix-secrets.yml` #postgresql does not support base64 encoded secret 
 `podman play kube --configmap=pgsql-cm.yml pgsql-pod.yml`
 `podman play kube --configmap=zabbix-server-cm.yml zabbix-server-pod.yml`
 `podman play kube --configmap=zabbix-web-cm.yml zabbix-web-pod.yml`

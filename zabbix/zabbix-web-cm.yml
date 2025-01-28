@@ -7,5 +7,6 @@ data:
   # Zabbix DB config
   DB_SERVER_HOST: zb-pgsql
   DB_SERVER_PORT: 5432
-  POSTGRES_USER: zabbix
+  POSTGRES_USER: zabbix 
+  POSTGRES_PASSWORD: zabbix #postgresql does not support base64 encoded secret 
   POSTGRES_DB: zabbix

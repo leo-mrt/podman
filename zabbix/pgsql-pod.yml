@@ -13,7 +13,7 @@ spec:
         optional: false
     - secretRef:
         name: zabbix-secrets
-        optional: false
+        optional: true
     image: docker.io/library/postgres:16.6
     resources: {}
     securityContext:
