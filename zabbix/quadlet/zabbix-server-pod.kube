@@ -2,8 +2,9 @@
 WantedBy=default.target
 
 [Unit]
+After=pgsql-pod.service
 
 [Kube]
-Yaml=/etc/containers/systemd/zabbix-server-pod.yml
-ConfigMap=/etc/containers/systemd/zabbix-cm.yml
+Yaml=zabbix-server-pod.yml
+ConfigMap=zabbix-cm.yml
 PublishPort=10051:10051

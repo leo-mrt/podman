@@ -2,8 +2,9 @@
 WantedBy=default.target
 
 [Unit]
+After=zabbix-server-pod.service
 
 [Kube]
-Yaml=/etc/containers/systemd/zabbix-web-pod.yml
-ConfigMap=/etc/containers/systemd/zabbix-cm.yml
+Yaml=zabbix-web-pod.yml
+ConfigMap=zabbix-cm.yml
 PublishPort=8080:8080
