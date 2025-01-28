@@ -7,13 +7,24 @@ metadata:
 spec:
   containers:
   - name: pgsql
-    envFrom:
-    - configMapRef:
-        name: pgsql-cm
-        optional: false
-    - secretRef:
-        name: zabbix-secrets
-        optional: true
+    env:
+      - name: POSTGRES_USER
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: POSTGRES_USER
+
+      - name: POSTGRES_DB
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: POSTGRES_DB
+
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: POSTGRES_PASSWORD
     image: docker.io/library/postgres:16.6
     resources: {}
     securityContext:

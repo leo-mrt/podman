@@ -7,13 +7,36 @@ metadata:
 spec:
   containers:
   - name: zabbix-web-nginx-pgsql
-    envFrom:
-    - configMapRef:
-        name: zabbix-web-cm
-        optional: false
-    - secretRef:
-        name: zabbix-secrets
-        optional: true
+    env:
+      - name: DB_SERVER_HOST
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: DB_SERVER_HOST
+
+      - name: DB_SERVER_PORT
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: DB_SERVER_PORT
+
+      - name: POSTGRES_USER
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: POSTGRES_USER
+
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: POSTGRES_PASSWORD
+
+      - name: POSTGRES_DB
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: POSTGRES_DB
     image: docker.io/zabbix/zabbix-web-nginx-pgsql:7.0.2-alpine
     ports:
     - containerPort: 8080
