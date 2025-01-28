@@ -8,6 +8,18 @@ spec:
   containers:
   - name: zabbix-web-nginx-pgsql
     env:
+      - name: ZBX_SERVER_HOST
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: ZBX_SERVER_HOST
+
+      - name: ZBX_SERVER_NAME
+        valueFrom:
+          configMapKeyRef:
+            name: zabbix-cm
+            key: ZBX_SERVER_NAME
+
       - name: DB_SERVER_HOST
         valueFrom:
           configMapKeyRef:

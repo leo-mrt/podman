@@ -37,12 +37,6 @@ spec:
           configMapKeyRef:
             name: zabbix-cm
             key: POSTGRES_DB
-
-      - name: ZBX_SERVER_NAME
-        valueFrom:
-          configMapKeyRef:
-            name: zabbix-cm
-            key: ZBX_SERVER_NAME
     image: docker.io/zabbix/zabbix-server-pgsql:7.0.2-alpine
     ports:
     - containerPort: 10051

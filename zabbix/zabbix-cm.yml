@@ -11,3 +11,4 @@ data:
   POSTGRES_PASSWORD: zabbix #postgresql does not support base64 encoded secret 
   POSTGRES_DB: zabbix
   ZBX_SERVER_NAME: zabbix
+  ZBX_SERVER_HOST: 192.168.253.10

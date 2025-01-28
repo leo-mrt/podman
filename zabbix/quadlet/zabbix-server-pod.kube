@@ -5,5 +5,5 @@ WantedBy=default.target
 
 [Kube]
 Yaml=/etc/containers/systemd/zabbix-server-pod.yml
-ConfigMap=/etc/containers/systemd/zabbix-server-cm.yml
+ConfigMap=/etc/containers/systemd/zabbix-cm.yml
 PublishPort=10051:10051
